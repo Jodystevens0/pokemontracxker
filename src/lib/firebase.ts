@@ -5,13 +5,13 @@ import { getFirestore } from 'firebase/firestore';
 
 // Firebase configuration object with API keys and project details
 const firebaseConfig = {
-  apiKey: 'AIzaSyA3Ok6MxgnBb2g193lct4G4FVxqYMnbAJg',
-  authDomain: 'react-firebase-auth-24a31.firebaseapp.com',
-  projectId: 'react-firebase-auth-24a31',
-  storageBucket: 'react-firebase-auth-24a31.appspot.com',
-  messagingSenderId: '895791381586',
-  appId: '1:895791381586:web:3eb0fb69522822edc9b38b',
-  measurementId: 'G-F9GX9QQMV4',
+  apiKey: "AIzaSyDCkfofPqwJDvOt_y3ah772-SKWJ2eIOfY",
+  authDomain: "pokemonapp-8fb3e.firebaseapp.com",
+  projectId: "pokemonapp-8fb3e",
+  storageBucket: "pokemonapp-8fb3e.appspot.com",
+  messagingSenderId: "1036225049555",
+  appId: "1:1036225049555:web:ae084534983e94f2d33526",
+  measurementId: "G-PVTCYCJQGS"
 };
 
 // Initialize Firebase app using the provided configuration
