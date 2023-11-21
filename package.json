@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.js",
   "homepage": "https://pokefolder.com",
-  "license": "MIT",
   "scripts": {
     "build": "next build",
     "start": "next start",
@@ -12,17 +11,7 @@
     "dev": "next dev",
     "bs": "next build && next start",
     "format": "prettier --write ./src"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/thegoldenbolden/pokefolder.git"
-  },
-  "author": {
-    "name": "Jacob Bolden",
-    "url": "https://www.jacobbolden.com"
-  },
-  "bugs": {
-    "url": "https://github.com/thegoldenbolden/pokefolder/issues"
+ 
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.1.2",
