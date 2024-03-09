@@ -28,7 +28,7 @@ export default function Page() {
         <div className="flex text-center flex-col items-center justify-center gap-3 w-full sm:w-3/4">
           {/* Main title for the section */}
           <h1 className="font-bungee select-none gradient-text break-words text-5xl md:text-6xl uppercase">
-            Build the perfect deck
+            Discover cards, Build decks and track your own portfolio!
           </h1>
           {/* Searchbar component for searching Pokemon cards */}
           <Searchbar id="search" to="/search" size="md" />
