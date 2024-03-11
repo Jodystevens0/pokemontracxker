@@ -1,5 +1,5 @@
 'use client';
-import { auth } from '../lib/firebase'; // Adjust the path based on your project structure
+import { auth } from '../lib/firebase'; // path based on project structure
 import NextLink from 'next/link';
 import { Link as CustomLink } from '@/ui/link';
 import { Searchbar } from './searchbar';

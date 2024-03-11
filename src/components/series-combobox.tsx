@@ -11,6 +11,7 @@ import {
 } from '@/components/ui/popover';
 
 import dynamic from 'next/dynamic';
+// Dynamically import components from '@/ui/command' using Next.js dynamic import.
 
 const Command = dynamic(() =>
   import('@/ui/command').then((mod) => mod.Command),
@@ -29,11 +30,16 @@ const CommandItem = dynamic(() =>
   import('@/ui/command').then((mod) => mod.CommandItem),
 );
 
+// Define the SeriesCombobox component.
 export default function SeriesCombobox({ series }: { series: string[] }) {
-  const [open, setOpen] = useState(false);
+    // State for managing the open/close state of the popover and the value of the input.
+    const [open, setOpen] = useState(false);
   const [value, setValue] = useState('');
 
   return (
+      // Popover component to display a list of series. And to create a popover interface
+      // Button acting as a combobox to trigger the popover. Once clicked "open" state"
+
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button
@@ -52,6 +58,7 @@ export default function SeriesCombobox({ series }: { series: string[] }) {
       </PopoverTrigger>
       <PopoverContent className="w-[200px] p-0">
         {open && (
+            //renders a CommandInput component for filtering the series list, if none found display command empty message
           <Command>
             <CommandInput placeholder="Jump to series..." className="h-9" />
             <CommandEmpty>No series found.</CommandEmpty>

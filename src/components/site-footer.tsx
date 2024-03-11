@@ -32,7 +32,7 @@ export default function Footer() {
           Pokémon Company International, Inc, and GAMEFREAK. This website is not
           produced, endorsed, supported, or affiliated with Nintendo, The
           Pokémon Company International, Inc, or GAMEFREAK. All other content ©
-          2023 PokeFolder.
+          2024 PokeFolder.
         </div>
       </div>
     </footer>

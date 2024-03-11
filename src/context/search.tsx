@@ -32,12 +32,19 @@ const defaults: InitialState = {
 };
 
 // const initial: InitialState = structuredClone(defaults);
+
+// Create a context for providing the form state to components.
 const FormContext = createContext<InitialState>(null as any);
+
+// Create a context for providing the dispatch function for form actions to components.
 const DispatchContext = createContext<Dispatch<FormAction>>(null as any);
+// Create a custom hook to access the form state from the context.
 const useFormContext = () => useContext(FormContext);
 const useDispatchContext = () => useContext(DispatchContext);
 
+// Define the reducer function to handle form actions and update the state accordingly.
 const reducer = (state: InitialState, action: FormAction): InitialState => {
+  // If the action has a key and the corresponding state value is undefined, throw an error.
   if (action.key && state[action.key] === undefined) {
     throw Error(`Invalid key: ${action.key}`);
   }
