@@ -111,7 +111,7 @@ function Page() {
               <i className="fas fa-lock"></i>
               <input
                 type="password"
-                placeholder="Password"
+                placeholder="Password Must be 6 characters"
                 id="password"
                 value={details.password}
                 onChange={handleChange}
