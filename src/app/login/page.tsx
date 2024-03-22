@@ -101,7 +101,7 @@ function Page() {
               <i className="fas fa-envelope"></i>{' '}
               <input
                 type="email11"
-                placeholder="email11"
+                placeholder="email"
                 id="email11"
                 value={details.email}
                 onChange={handleChange}
