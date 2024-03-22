@@ -100,9 +100,9 @@ function Page() {
             <div className="input-field">
               <i className="fas fa-envelope"></i>{' '}
               <input
-                type="email11"
+                type="email"
                 placeholder="email"
-                id="email11"
+                id="email"
                 value={details.email}
                 onChange={handleChange}
               />
@@ -111,7 +111,7 @@ function Page() {
               <i className="fas fa-lock"></i>
               <input
                 type="password"
-                placeholder="Password"
+                placeholder="Password(Must be 6 characters)"
                 id="password"
                 value={details.password}
                 onChange={handleChange}
