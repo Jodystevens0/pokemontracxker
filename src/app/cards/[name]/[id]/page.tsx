@@ -444,7 +444,7 @@ async function MoreCardsFromSet({ set, cardName }: CardFromSetProps) {
       </h2>
             {/* Grid layout for displaying cards */}
       <div className="grid gap-4 grid-cols-fluid-sm items-center justify-center">
-                {/* Map through cards and render each one */}
+                {/* Map through cards and render each one*/}
         {cards.data.map((card) => (
           // @ts-ignore
           <Card key={card.id} {...card} />
