@@ -20,20 +20,25 @@ type CardParams = { params: { id: string } };
 export async function generateMetadata({
   params,
 }: CardParams): Promise<Metadata> {
+    // Retrieve card data asynchronously
   const response = await getCard(params.id);
+    // If there's no data in the response, return a default title
   if (!response?.data) return { title: 'Not Found' };
+    // Extract card information from the response
   const card = response.data;
+    // Construct the series string, including the series name if available
   const series = card.set.series ? `${card.set.series}: ` : '' + card.set.name;
 
   return {
-    title: { absolute: `${card.name} - ${card.set.name}` },
-    description: `Get information about ${card.name} from ${series}.`,
-    keywords: [card.name, series, ...keywords],
+    title: { absolute: `${card.name} - ${card.set.name}` },   // Define the title including card and set names
+    description: `Get information about ${card.name} from ${series}.`,   // Define the description with card name and series
+    keywords: [card.name, series, ...keywords],  // Combine card name, series, and additional keywords
   };
 }
 
 // Default component for the card page
 export default async function Page({ params }: CardParams) {
+  // Asynchronously retrieve card data based on provided parameters
   const response = await getCard(params.id);
   const card = response?.data;
   // If the card is not found, navigate to the 404 page
@@ -51,6 +56,7 @@ export default async function Page({ params }: CardParams) {
   card.nationalPokedexNumbers ||= [];
 
   // Render the card details
+  // Main container for card details with flex layout and vertical gap
   return (
     <main className="my-6 md:my-10 flex flex-col gap-2">
       <div className="flex flex-col sm:relative gap-4 sm:flex-row">
@@ -58,27 +64,35 @@ export default async function Page({ params }: CardParams) {
           className="sm:sticky sm:top-6 h-max self-center sm:self-start"
           height={450}
           width={300}
+          // Alternative text for accessibility, defaulting to 'a pokemon card'
           alt={card.name ?? 'a pokemon card'}
+          // Image source, preferring large image, then small image, then a default placeholder
           src={card.images.large || card.images.small || './back.png'}
         />
+                {/* Header section containing card name, level, supertype, and flavor text */}
         <section className="grow flex flex-col gap-2 divide-y divide-spotlight">
           <header className="font-bold flex-col gap-2">
             <h1 className="text-3xl">
               {card.name}&nbsp;
+               {/* Display card level if available */}
               {card.level && (
                 <span className="text-sm uppercase">lv. {card.level}</span>
               )}
             </h1>
+                      {/* Display card supertype */}
             <span className="block">{card.supertype}</span>
             {card.flavorText && (
               <p className="italic text-sm font-normal">{card.flavorText}</p>
             )}
           </header>
+                  {/* General section containing various card details */}
           <Section heading="General">
             <ul className="grid gap-2 grid-cols-fluid-sm">
+                          {/* Item for artists */}
               <Item title="Artists">
                 <Optional data={card.artist}>
                   <div className="flex flex-wrap gap-2 items-center">
+                                      {/* Mapping through artists and rendering search links */}
                     {card.artist.split('+').map((name) => {
                       return (
                         <SearchLink q="artists" value={name} key={name}>
@@ -261,11 +275,13 @@ export default async function Page({ params }: CardParams) {
 }
 
 // Component for rendering sections in the card details
+// Define props for Section component including heading, children, and optional className
 type SectionProps = React.PropsWithChildren<{
   heading: React.ReactNode;
   className?: string;
 }>;
 function Section({ heading, children, className }: SectionProps) {
+    // Return section element with flex layout, vertical gap, and padding
   return (
     <section className="flex flex-col gap-2 py-3">
       <h2 className="flex gap-2 text-2xl flex-wrap font-bold">{heading}</h2>
@@ -291,9 +307,12 @@ type CardTypeProps = {
 };
 
 function TypeIcon({ types, id }: CardTypeProps) {
+  // If no types are provided, render placeholder
   if (!types.length) return <>--</>;
+    // Otherwise, render type icons
   return (
     <>
+          {/* Map through types and render link with type icon */}
       {types.map(({ type, value }, i) => {
         return (
           <Link
@@ -301,6 +320,7 @@ function TypeIcon({ types, id }: CardTypeProps) {
             className="flex items-center flex-wrap gap-2"
             href={`/search?types=${type}`}
           >
+                        {/* Image representing the type */}
             <Image
               src={`/types/${type.toLowerCase()}.png`}
               height={24}
@@ -308,6 +328,7 @@ function TypeIcon({ types, id }: CardTypeProps) {
               className="object-contain"
               alt={`${type} icon`}
             />
+                        {/* Display type value */}
             {value}
           </Link>
         );
@@ -323,14 +344,20 @@ type LegalityProps = {
 };
 
 function Legalities(props: LegalityProps) {
+    // If no legalities provided, return null
   if (!props.legalities) return null;
+    // Convert legalities object to array of key-value pairs
   const legalities = Object.entries(props.legalities);
+    // If legalities array is empty, return null
   if (!legalities.length) return null;
+    // Otherwise, render legalities
   return (
     <>
+          {/* Map through legalities and render each one as an Item component */}
       {legalities.map(([legality, value]) => (
         <Item key={`${props.name ?? 'card'}-${legality}`} title={legality}>
           <Optional data={value}>
+                        {/* Render SearchLink component for each legality */}
             <SearchLink q="legalities" value={`${legality}_${value}`}>
               {value}
             </SearchLink>
@@ -393,28 +420,31 @@ function SetInfo({ set }: { set?: TCardFull['set'] }) {
 
 type CardFromSetProps = { set: TSet; cardName: string };
 async function MoreCardsFromSet({ set, cardName }: CardFromSetProps) {
+    // Retrieve cards from the set excluding the provided cardName
   const cards = await getCards(
     new URLSearchParams(
       `sets=${set.id}&orderBy=-cardmarket&exclude_cards=${cardName}&pageSize=5`,
     ),
   );
-
+  // Define SetLink component linking to the set search page
   const SetLink = (
     <SearchLink q="sets" value={set.id}>
       {set.name}
     </SearchLink>
   );
-
+  // If no cards found, render message
   if (!cards?.data || cards.totalCount === 0) {
     return <p>No cards found from {SetLink}</p>;
   }
-
+  // Otherwise, render cards from the set
   return (
     <div className="flex flex-col gap-2 w-full">
       <h2 className="text-2xl flex flex-wrap gap-2">
         More Cards From {SetLink}
       </h2>
+            {/* Grid layout for displaying cards */}
       <div className="grid gap-4 grid-cols-fluid-sm items-center justify-center">
+                {/* Map through cards and render each one */}
         {cards.data.map((card) => (
           // @ts-ignore
           <Card key={card.id} {...card} />
