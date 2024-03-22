@@ -101,7 +101,7 @@ function Page() {
               <i className="fas fa-envelope"></i>{' '}
               <input
                 type="email"
-                placeholder="email"
+                placeholder="Email"
                 id="email"
                 value={details.email}
                 onChange={handleChange}
@@ -111,7 +111,7 @@ function Page() {
               <i className="fas fa-lock"></i>
               <input
                 type="password"
-                placeholder="Password(Must be 6 characters)"
+                placeholder="Password (Length of 6 Alphanumeric)"
                 id="password"
                 value={details.password}
                 onChange={handleChange}
@@ -167,7 +167,7 @@ function Page() {
               <i className="fas fa-envelope"></i>{' '}
               <input
                 type="email"
-                placeholder="email"
+                placeholder="Email"
                 id="email"
                 value={details.email}
                 onChange={handleChange}
@@ -177,7 +177,7 @@ function Page() {
               <i className="fas fa-lock"></i>
               <input
                 type="password"
-                placeholder="Password"
+                placeholder="Password (Length of 6 Alphanumeric)"
                 id="password"
                 value={details.password}
                 onChange={handleChange}
